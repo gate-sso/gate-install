@@ -11,6 +11,9 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
+**/inspec.lock
+*.log
+.vagrant
 
 # Used by dotenv library to load environment variables.
 # .env
