@@ -2,12 +2,15 @@
 
 # Inspec test for recipe gate-install::default
 
-# The Inspec reference, with examples and extensive documentation, can be
-# found at http://inspec.io/docs/reference/resources/
 
 unless os.windows?
-  # This is an example test, replace with your own test.
   describe user('root'), :skip do
+    it { should exist }
+  end
+  describe user('gate_sso'), :skip do
+    it { should exist }
+  end
+  describe group('gate_sso'), :skip do
     it { should exist }
   end
 end
@@ -20,3 +23,16 @@ end
 describe package('ruby2.4') do
   it { should be_installed }
 end
+
+describe package('nodejs') do
+  it { should be_installed}
+end
+
+describe gem('bundler', 'bundle') do
+  it { should be_installed }
+end
+
+describe file('/tmp/gate_source.zip') do
+  it {should exist}
+end
+

@@ -1,0 +1,5 @@
+DEPENDENCIES
+  zipfile (~> 0.2.0)
+
+GRAPH
+  zipfile (0.2.0)

@@ -14,8 +14,41 @@ apt_update
 
 package 'ruby2.4'
 package 'ruby2.4-dev'
+package 'nodejs'
 
-file '/tmp/hello.txt' do
-  content '<html>This is a placeholder for the home page.</html>'
+gem_package 'bundler'
+
+#create the group
+
+group 'gate_sso' do
+  action :create
+  gid 2000
+end
+
+#create the user
+user 'gate_sso' do
+  comment 'Gate SSO Application user'
+  uid 2000
+  gid 'gate_sso'
+  home '/opt/gate_sso'
+  manage_home true
+  shell '/bin/bash'
+  action :create
+end
+
+
+file '/tmp/gate_source.zip' do
+  content 'this is temp file'
   mode '0755'
 end
+
+remote_file '/tmp/gate_source.zip' do
+  source 'https://codeload.github.com/gate-sso/gate/zip/master'
+  owner 'gate_sso'
+  group 'gate_sso'
+  mode '0644'
+  action :create
+end
+
+
+
