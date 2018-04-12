@@ -50,5 +50,10 @@ remote_file '/tmp/gate_source.zip' do
   action :create
 end
 
+zipfile '/tmp/gate_source.zip' do
+  into '/opt/gate_sso/current'
+end
+
+
 
 
