@@ -51,9 +51,13 @@ remote_file '/tmp/gate_source.zip' do
 end
 
 zipfile '/tmp/gate_source.zip' do
-  into '/opt/gate_sso/current'
+  into '/opt/gate_sso/'
+  overwrite true
 end
 
-
-
-
+execute "chown-directory-gate-source" do
+  command "chown -R gate_sso:gate_sso /opt/gate_sso/gate-master"
+  user "root"
+  action :run
+  not_if "stat -c %U /opt/gate_sso/gate_master |grep gate_sso"
+end
