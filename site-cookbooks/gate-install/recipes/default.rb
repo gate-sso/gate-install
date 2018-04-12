@@ -15,6 +15,12 @@ apt_update
 package 'ruby2.4'
 package 'ruby2.4-dev'
 package 'nodejs'
+package 'build-essential' 
+package 'patch'
+package 'ruby-dev' 
+package 'zlib1g-dev'
+package 'liblzma-dev'
+package 'libmysqlclient-dev'
 
 gem_package 'bundler'
 
