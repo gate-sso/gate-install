@@ -36,6 +36,6 @@ describe file('/tmp/gate_source.zip') do
   it {should exist}
 end
 
-describe directory('/opt/gate_sso/current') do
+describe directory('/opt/gate_sso/gate-master') do
   it {should exist}
 end

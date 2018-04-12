@@ -110,10 +110,6 @@ GEM
     cheffish (13.1.0)
       chef-zero (~> 13.0)
       net-ssh
-    chefspec (7.2.0)
-      chef (>= 12.14.89)
-      fauxhai (>= 4)
-      rspec (~> 3.0)
     cleanroom (1.0.0)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
@@ -132,8 +128,6 @@ GEM
     faraday-cookie_jar (0.0.6)
       faraday (>= 0.7.4)
       http-cookie (~> 1.0.0)
-    fauxhai (6.1.0)
-      net-ssh
     ffi (1.9.23)
     ffi-yajl (2.3.1)
       libyajl2 (~> 1.2)
@@ -356,7 +350,8 @@ PLATFORMS
 DEPENDENCIES
   berkshelf
   chef-dk
-  chefspec
+  ffi
+  ffi-yajl
   inspec
   knife-solo
 
