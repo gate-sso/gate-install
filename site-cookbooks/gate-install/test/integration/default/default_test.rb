@@ -36,6 +36,10 @@ describe file('/tmp/gate_source.zip') do
   it {should exist}
 end
 
+describe file('/opt/gate_sso/gate_release.tar.gz') do
+  it {should exist}
+end
+
 describe directory('/opt/gate_sso/gate-master') do
   it {should exist}
 end

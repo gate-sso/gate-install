@@ -67,3 +67,13 @@ execute "chown-directory-gate-source" do
   action :run
   not_if "stat -c %U /opt/gate_sso/gate_master |grep gate_sso"
 end
+
+remote_file '/opt/gate_sso/gate_release.tar.gz' do
+  source JSON.parse(Chef::HTTP.new('https://api.github.com/repos/gate-sso/gate/releases/latest').get(""))["assets"][0]["browser_download_url"]
+  owner 'gate_sso'
+  group 'gate_sso'
+  mode '0644'
+  action :create
+end
+
+
