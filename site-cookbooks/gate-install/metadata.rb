@@ -19,4 +19,5 @@ chef_version '>= 12.14' if respond_to?(:chef_version)
 #
 # source_url 'https://github.com/gate-sso/gate-install'
 #
-depends 'zipfile', '~> 0.2.0'
+depends 'zipfile'
+depends 'tar'

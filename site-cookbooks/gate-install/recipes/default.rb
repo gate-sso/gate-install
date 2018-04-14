@@ -43,37 +43,25 @@ user 'gate_sso' do
 end
 
 
-file '/tmp/gate_source.zip' do
-  content 'this is temp file'
-  mode '0755'
-end
-
-remote_file '/tmp/gate_source.zip' do
-  source 'https://codeload.github.com/gate-sso/gate/zip/master'
-  owner 'gate_sso'
-  group 'gate_sso'
-  mode '0644'
-  action :create
-end
-
-zipfile '/tmp/gate_source.zip' do
-  into '/opt/gate_sso/'
-  overwrite true
-end
-
-execute "chown-directory-gate-source" do
-  command "chown -R gate_sso:gate_sso /opt/gate_sso/gate-master"
-  user "root"
+execute "make source directory" do
+  command "mkdir -p /opt/gate_sso/#{JSON.parse(Chef::HTTP.new('https://api.github.com/repos/gate-sso/gate/releases/latest').get(''))['tag_name']}"
+  user 'gate_sso'
   action :run
-  not_if "stat -c %U /opt/gate_sso/gate_master |grep gate_sso"
+  not_if { ::File.exist?("/opt/gate_sso/#{JSON.parse(Chef::HTTP.new('https://api.github.com/repos/gate-sso/gate/releases/latest').get(''))['tag_name']}") } 
 end
 
-remote_file '/opt/gate_sso/gate_release.tar.gz' do
+remote_file "/opt/gate_sso/#{JSON.parse(Chef::HTTP.new('https://api.github.com/repos/gate-sso/gate/releases/latest').get(''))['tag_name']}.tar.gz" do
   source JSON.parse(Chef::HTTP.new('https://api.github.com/repos/gate-sso/gate/releases/latest').get(""))["assets"][0]["browser_download_url"]
   owner 'gate_sso'
   group 'gate_sso'
   mode '0644'
   action :create
+  not_if { ::File.exist?("/opt/gate_sso/#{JSON.parse(Chef::HTTP.new('https://api.github.com/repos/gate-sso/gate/releases/latest').get(''))['tag_name']}.tar.gz") } 
 end
+
+tar_extract JSON.parse(Chef::HTTP.new('https://api.github.com/repos/gate-sso/gate/releases/latest').get(""))["assets"][0]["browser_download_url"] do
+  target_dir "/opt/gate_sso/#{JSON.parse(Chef::HTTP.new('https://api.github.com/repos/gate-sso/gate/releases/latest').get(''))['tag_name']}"
+  creates "/opt/gate_sso/#{JSON.parse(Chef::HTTP.new('https://api.github.com/repos/gate-sso/gate/releases/latest').get(''))['tag_name']}/Gemfile"
+end 
 
 

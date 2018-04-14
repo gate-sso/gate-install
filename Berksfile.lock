@@ -1,7 +1,10 @@
 DEPENDENCIES
   gate-install
+  tar
+  zipfile
 
 GRAPH
   gate-install (0.1.0)
     zipfile (~> 0.2.0)
+  tar (2.1.1)
   zipfile (0.2.0)
