@@ -1,0 +1,15 @@
+[Unit]
+Description=systemd script for running <%=@app_name%>
+
+[Service]
+Restart=on-failure
+RestartSec=2
+StartLimitInterval=50
+StartLimitBurst=10
+EnvironmentFile=-/etc/default/<%=@app_name%>.conf
+ExecStart=<%=@gate_script_location%>
+User=<%=@app_name%>
+
+[Install]
+WantedBy=multi-user.target
+
