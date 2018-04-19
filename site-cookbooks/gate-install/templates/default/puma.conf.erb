@@ -1,6 +1,6 @@
 #!/usr/bin/env puma
 
-directory '/opt/<%= @app_home %>/<%= @app_name %>'
+directory '/opt/<%= @app_home %>/current %>'
 environment 'production'
 pidfile '/var/run/<%= @app_name %>/<%= @app_name %>.pid'
 state_path '/var/run/<%= @app_name %>/<%= @app_name %>_puma.state'

@@ -7,7 +7,7 @@ unless os.windows?
   describe user('root'), :skip do
     it { should exist }
   end
-  describ user('gate_sso'), :skip do
+  describe user('gate_sso'), :skip do
     it { should exist }
   end
   describe group('gate_sso'), :skip do
