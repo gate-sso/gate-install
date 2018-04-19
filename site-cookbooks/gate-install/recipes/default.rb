@@ -9,7 +9,7 @@
 
 app_name = node['app_name']
 gate_script_location = node['gate_script_location']
-command = node['command']
+command_name = node['command_name']
 thread = node['thread']
 
 puts "App Name: #{app_name}"
@@ -88,6 +88,8 @@ end
 link "/opt/#{app_name}/#{app_name}"  do
   to "/opt/#{app_name}/#{release_name}"
   action :create
+  user app_name
+  group app_name
 end
 
 execute "make source directory" do
@@ -96,15 +98,20 @@ execute "make source directory" do
   not_if { ::File.exist?("/etc/puma") }
 end
 
-
+directory "/var/run/#{app_name}" do
+  owner app_name
+  group app_name
+  mode 0755
+  action :create
+end
 
 template "/etc/puma/#{app_name}.rb" do
   source "puma.conf.erb"
   owner app_name
   group app_name
   variables( 
-            app_name: app_name, 
-            app_home: app_name 
+            app_name: app_name,
+            app_home: app_name
            )
   mode "400"
 end
@@ -114,7 +121,7 @@ template gate_script_location do
   mode   "0755"
   owner app_name
   group app_name
-  variables( app_name: app_name, app_home: app_name, command: command )
+  variables( app_name: app_name, app_home: app_name, command_name: command_name )
   notifies :restart, "service[puma]", :delayed
 end
 
