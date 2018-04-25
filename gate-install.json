@@ -3,5 +3,5 @@
   "gate_script_location": "/opt/gate_sso/gate_start.sh",
   "command_name": "puma -C /etc/puma/gate_sso.rb",
   "thread": 16,
-  "run_list": [ "recipe[gate-install]" ]
+  "run_list": ["recipe[gate-install]"]
 }
