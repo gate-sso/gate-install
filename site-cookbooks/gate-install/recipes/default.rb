@@ -32,6 +32,11 @@ package 'ruby-dev'
 package 'zlib1g-dev'
 package 'liblzma-dev'
 package 'libmysqlclient-dev'
+package 'ruby-switch'
+
+execute "make ruby2.4 default" do
+  command "/usr/bin/ruby-switch --set ruby2.4"
+end
 
 gem_package 'bundler'
 
