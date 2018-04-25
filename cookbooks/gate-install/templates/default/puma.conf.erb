@@ -1,0 +1,14 @@
+#!/usr/bin/env puma
+
+directory '/opt/<%= @app_home %>/<%= @app_name %>'
+environment 'production'
+pidfile '/var/run/<%= @app_name %>/<%= @app_name %>.pid'
+state_path '/var/run/<%= @app_name %>/<%= @app_name %>_puma.state'
+threads 1, 16
+
+bind 'tcp://0.0.0.0:8080'
+
+on_restart do
+  puts 'On restart...'
+end
+

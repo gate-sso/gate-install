@@ -1,0 +1,5 @@
+#!/bin/sh -
+export TZ=Asia/Jakarta
+cd /opt/<%= @app_name %>/<%= @app_name %>
+bundle install --local --path .local
+bundle exec <%= @command_name %>
