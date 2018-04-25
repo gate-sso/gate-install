@@ -88,6 +88,7 @@ tar_extract release_file  do
   puts "user for tar: #{app_name}"
   user "#{app_name}"
   group "#{app_name}"
+  notifies :restart, "service[puma]", :delayed
 end 
 
 link "/opt/#{app_name}/#{app_name}"  do
