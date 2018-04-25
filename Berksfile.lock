@@ -4,7 +4,8 @@ DEPENDENCIES
   zipfile
 
 GRAPH
-  gate-install (0.1.0)
-    zipfile (~> 0.2.0)
+  gate-install (0.2.0)
+    tar (>= 0.0.0)
+    zipfile (>= 0.0.0)
   tar (2.1.1)
   zipfile (0.2.0)
